@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/k3FJL538mD.png?imageslim">
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/gJ7kF00l0h.png?imageslim">
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/46J8aD6I1f.png?imageslim">
-<meta property="og:updated_time" content="2018-08-28T13:32:10.642Z">
+<meta property="og:updated_time" content="2018-08-29T03:02:42.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes集群部署">
 <meta name="twitter:description" content="Kubernetes环境部署准备环境一台Master，两台Node，都是4c4g的配置 123master IP: 192.168.1.89Node1 IP: 192.168.1.90NOde2 IP: 192.168.1.91 修改对应的主机名、互相配置免密要登录，另外在/etc/hosts文件中添加主机名和ip对应的解析 对应的/etc/hosts文件添加内容如下： 123192.168.1.">
@@ -367,7 +367,7 @@
 <p>执行初始化</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --kubernetes-version=v1.11.2 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap</span><br></pre></td></tr></table></figure>
 <p>Master节点初始化完成后，一定要保管好初始化后的认证信息，以便Node节点加入Master节点认证使用：</p>
-<p><code>kubeadm join 192.168.1.89:6443 --token vyn3r0.43sqau4qyzzjhyno --discovery-token-ca-cert-hash sha256:8a8fdf28ec989c5972af292f6721529e847a7a2f17dfb137d6bbcc3c909ca4a6</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join 192.168.1.89:6443 --token vyn3r0.43sqau4qyzzjhyno --discovery-token-ca-cert-hash sha256:8a8fdf28ec989c5972af292f6721529e847a7a2f17dfb137d6bbcc3c909ca4a6</span><br></pre></td></tr></table></figure>
 <p><img src="http://pc3mx1j89.bkt.clouddn.com/blog/180828/CkjFkfg2F9.png?imageslim" alt="认证信息"></p>
 <p>初始化结束会自动pull 要使用到的image</p>
 <p><img src="http://pc3mx1j89.bkt.clouddn.com/blog/180828/GAeAjdAj1C.png?imageslim" alt="Master image ls"></p>
