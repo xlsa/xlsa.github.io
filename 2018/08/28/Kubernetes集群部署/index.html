@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/k3FJL538mD.png?imageslim">
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/gJ7kF00l0h.png?imageslim">
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/46J8aD6I1f.png?imageslim">
-<meta property="og:updated_time" content="2018-08-29T03:02:42.601Z">
+<meta property="og:updated_time" content="2018-08-29T04:00:58.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes集群部署">
 <meta name="twitter:description" content="Kubernetes环境部署准备环境一台Master，两台Node，都是4c4g的配置 123master IP: 192.168.1.89Node1 IP: 192.168.1.90NOde2 IP: 192.168.1.91 修改对应的主机名、互相配置免密要登录，另外在/etc/hosts文件中添加主机名和ip对应的解析 对应的/etc/hosts文件添加内容如下： 123192.168.1.">
@@ -385,6 +385,7 @@
 <li>Pod网络：10.244.0.0/16</li>
 </ol>
 <p>在每个节点确保firewalld服务关闭，禁止开机自启，关闭selinux。</p>
+<a id="more"></a>
 <h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><h3 id="添加仓库配置"><a href="#添加仓库配置" class="headerlink" title="添加仓库配置"></a>添加仓库配置</h3><p>添加docker的repo文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
 <p>添加Kubernetes的repo文件</p>
