@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/k3FJL538mD.png?imageslim">
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/gJ7kF00l0h.png?imageslim">
 <meta property="og:image" content="http://pc3mx1j89.bkt.clouddn.com/blog/180828/46J8aD6I1f.png?imageslim">
-<meta property="og:updated_time" content="2018-08-29T04:00:58.248Z">
+<meta property="og:updated_time" content="2018-09-04T08:40:41.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes集群部署">
 <meta name="twitter:description" content="Kubernetes环境部署准备环境一台Master，两台Node，都是4c4g的配置 123master IP: 192.168.1.89Node1 IP: 192.168.1.90NOde2 IP: 192.168.1.91 修改对应的主机名、互相配置免密要登录，另外在/etc/hosts文件中添加主机名和ip对应的解析 对应的/etc/hosts文件添加内容如下： 123192.168.1.">
@@ -422,7 +422,10 @@
 <p>查看节点状态</p>
 <p><img src="http://pc3mx1j89.bkt.clouddn.com/blog/180828/k3FJL538mD.png?imageslim" alt="节点状态"></p>
 <p>上图中，Master节点的状态是NotReady，是由于我们还没有部署flannel网络组件。<br>接下来我们手动部署flannel组件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p>下载flannel配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/kube-flannel</span><br><span class="line"><span class="built_in">cd</span> ~/kube-flannel</span><br><span class="line">wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p>启用<code>Directrouting</code>功能，编辑配置文件在一下位置添加<code>&quot;Directrouting&quot;: true</code>字段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim kube-flannel.yml</span><br><span class="line">...</span><br><span class="line">  net-conf.json: |</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">"Network"</span>: <span class="string">"10.244.0.0/16"</span>,</span><br><span class="line">      <span class="string">"Backend"</span>: &#123;</span><br><span class="line">        <span class="string">"Type"</span>: <span class="string">"vxlan"</span>,</span><br><span class="line">        <span class="string">"Directrouting"</span>: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>flannel安装参考：<br><code>https://github.com/coreos/flannel</code></p>
 <p>安装完成后，节点状态变为Ready</p>
 <p><img src="http://pc3mx1j89.bkt.clouddn.com/blog/180828/gJ7kF00l0h.png?imageslim" alt="节点状态"></p>
