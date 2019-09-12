@@ -3,6 +3,25 @@
   
     
     <entry>
+      <title>K8s Ingress获取真实IP地址配置</title>
+      <link href="/2019/09/12/K8s%20Ingress%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%E9%85%8D%E7%BD%AE/"/>
+      <url>/2019/09/12/K8s%20Ingress%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9EIP%E5%9C%B0%E5%9D%80%E9%85%8D%E7%BD%AE/</url>
+      <content type="html"><![CDATA[<h1 id="K8s-Ingress获取真实IP地址配置"><a href="#K8s-Ingress获取真实IP地址配置" class="headerlink" title="K8s Ingress获取真实IP地址配置"></a>K8s Ingress获取真实IP地址配置</h1><h2 id="业务情况"><a href="#业务情况" class="headerlink" title="业务情况"></a>业务情况</h2><p>有一个web站点，通过ingress对外提供访问。用户访问链路如下</p><p>Client -&gt; WAF -&gt; Ingress-NGINX -&gt; Website(Pod)</p><h2 id="问题分析解决"><a href="#问题分析解决" class="headerlink" title="问题分析解决"></a>问题分析解决</h2><p>遇到的问题：业务获取到的IP为中间代理IP，不是真实客户端IP地址</p><h3 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h3><p>将请求头部的 <code>x-real-ip</code>, <code>x-forwarded-for</code>两个值打印出来，发现两个值内容相同，且只记录了一个IP。对于<code>x-forwarded-for</code>来说就有点奇怪了。只要经过中间的代理，例如CDN、Web防火墙，正常应该有两个及以上IP才对，如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: client1, proxy1, proxy2</span><br></pre></td></tr></table></figure><p>于是，进入 <strong>nginx-ingress-controller</strong> pod，查看具体的NGINX配置，看到</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header X-Real-IP              <span class="variable">$the_real_ip</span>;</span><br><span class="line">proxy_set_header X-Forwarded-For        <span class="variable">$the_real_ip</span>;</span><br></pre></td></tr></table></figure><p>可以看到，经过ingress-nginx后，<code>X-Real-IP</code> 和 <code>X-Forwarded-For</code>都被重写了，在<a href="(https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap)">ingress-nginx官网文档</a>得知，如果要将 <code>X-Forwarded-For</code> 不重写，完整显示，要在 <strong>nginx-configuration</strong> 中添加</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compute-full-forwarded-for: <span class="literal">true</span></span><br></pre></td></tr></table></figure><p>其实该字段保持默认的<code>false</code>即可，不然程序需要自己排除代理IP，这样不好。</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>最好让ingress-nginx自己排除代理IP，这样在<code>X-Real-IP</code> 或 <code>X-Forwarded-For</code> 中保留一个真实IP，程序直接获取该header值就行。</p><p>如何在ingress-nginx中排除代理IP呢？需要使用到nginx realip模块，确保realip模块是启用的</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -V | grep realip_module</span><br></pre></td></tr></table></figure><p>在正常的NGINX配置如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set_real_ip_from  ip_proxy1;</span><br><span class="line">set_real_ip_from  ip_proxy2;</span><br><span class="line">...</span><br><span class="line">set_real_ip_from  ip_proxyx;</span><br><span class="line">real_ip_header    X-Forwarded-For;</span><br><span class="line">real_ip_recursive on;</span><br></pre></td></tr></table></figure><p>在ingress-nginx配置 <strong>nginx-configuration</strong> 中添加如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxy-real-ip-cidr: ip_proxy1,ip_proxy2,ip_proxyx</span><br><span class="line">forwarded-for-header: X-Forwarded-For</span><br></pre></td></tr></table></figure></p><p><code>real_ip_recursive</code>无需配置，在<strong>nginx-ingress-controller</strong>的NGINX配置中默认是on。在整个HTTP代理链路中，要确保中间代理的IP都要添加到proxy-real-ip-cidr中，不然可能会不准确。</p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> ingress </tag>
+            
+            <tag> ingress-nginx </tag>
+            
+            <tag> 问题解决 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Kubernetes集群部署</title>
       <link href="/2018/08/28/Kubernetes%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/"/>
       <url>/2018/08/28/Kubernetes%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</url>
@@ -12,6 +31,8 @@
         <tags>
             
             <tag> Kubernetes </tag>
+            
+            <tag> k8s </tag>
             
         </tags>
       
@@ -27,6 +48,8 @@
         <tags>
             
             <tag> 数据加密 </tag>
+            
+            <tag> Openssl </tag>
             
         </tags>
       

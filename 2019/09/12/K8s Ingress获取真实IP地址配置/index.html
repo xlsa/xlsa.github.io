@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ingress,ingress-nginx,问题解决," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="xlsa@foxmail.com">
-<meta property="og:type" content="website">
-<meta property="og:title" content="静若安好">
-<meta property="og:url" content="https://llo.app/archives/2018/index.html">
+<meta name="description" content="K8s Ingress获取真实IP地址配置业务情况有一个web站点，通过ingress对外提供访问。用户访问链路如下 Client -&amp;gt; WAF -&amp;gt; Ingress-NGINX -&amp;gt; Website(Pod) 问题分析解决遇到的问题：业务获取到的IP为中间代理IP，不是真实客户端IP地址 排查过程将请求头部的 x-real-ip, x-forwarded-for两个值打印出来，">
+<meta name="keywords" content="ingress,ingress-nginx,问题解决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K8s Ingress获取真实IP地址配置">
+<meta property="og:url" content="https://llo.app/2019/09/12/K8s Ingress获取真实IP地址配置/index.html">
 <meta property="og:site_name" content="静若安好">
-<meta property="og:description" content="xlsa@foxmail.com">
+<meta property="og:description" content="K8s Ingress获取真实IP地址配置业务情况有一个web站点，通过ingress对外提供访问。用户访问链路如下 Client -&amp;gt; WAF -&amp;gt; Ingress-NGINX -&amp;gt; Website(Pod) 问题分析解决遇到的问题：业务获取到的IP为中间代理IP，不是真实客户端IP地址 排查过程将请求头部的 x-real-ip, x-forwarded-for两个值打印出来，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-12T09:46:44.142Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="静若安好">
-<meta name="twitter:description" content="xlsa@foxmail.com">
+<meta name="twitter:title" content="K8s Ingress获取真实IP地址配置">
+<meta name="twitter:description" content="K8s Ingress获取真实IP地址配置业务情况有一个web站点，通过ingress对外提供访问。用户访问链路如下 Client -&amp;gt; WAF -&amp;gt; Ingress-NGINX -&amp;gt; Website(Pod) 问题分析解决遇到的问题：业务获取到的IP为中间代理IP，不是真实客户端IP地址 排查过程将请求头部的 x-real-ip, x-forwarded-for两个值打印出来，">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://llo.app/archives/2018/"/>
+  <link rel="canonical" href="https://llo.app/2019/09/12/K8s Ingress获取真实IP地址配置/"/>
 
 
 
 
 
-  <title>归档 | 静若安好</title>
+  <title>K8s Ingress获取真实IP地址配置 | 静若安好</title>
   
 
 
@@ -153,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,111 +273,178 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 3 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://llo.app/2019/09/12/K8s Ingress获取真实IP地址配置/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Aiken">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://ws2.sinaimg.cn/large/006tNc79gy1ftgv5f4zu3j305u05ua9z.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="静若安好">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/08/28/Kubernetes集群部署/" itemprop="url">
-              
-                <span itemprop="name">Kubernetes集群部署</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">K8s Ingress获取真实IP地址配置</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-28T21:18:49+08:00"
-              content="2018-08-28" >
-          08-28
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-12T16:29:38+08:00">
+                2019-09-12
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/09/12/K8s Ingress获取真实IP地址配置/" class="leancloud_visitors" data-flag-title="K8s Ingress获取真实IP地址配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/21/数据加密传输学习总结/" itemprop="url">
-              
-                <span itemprop="name">数据加密传输学习总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-21T12:36:29+08:00"
-              content="2018-07-21" >
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <h1 id="K8s-Ingress获取真实IP地址配置"><a href="#K8s-Ingress获取真实IP地址配置" class="headerlink" title="K8s Ingress获取真实IP地址配置"></a>K8s Ingress获取真实IP地址配置</h1><h2 id="业务情况"><a href="#业务情况" class="headerlink" title="业务情况"></a>业务情况</h2><p>有一个web站点，通过ingress对外提供访问。用户访问链路如下</p>
+<p>Client -&gt; WAF -&gt; Ingress-NGINX -&gt; Website(Pod)</p>
+<h2 id="问题分析解决"><a href="#问题分析解决" class="headerlink" title="问题分析解决"></a>问题分析解决</h2><p>遇到的问题：业务获取到的IP为中间代理IP，不是真实客户端IP地址</p>
+<h3 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h3><p>将请求头部的 <code>x-real-ip</code>, <code>x-forwarded-for</code>两个值打印出来，发现两个值内容相同，且只记录了一个IP。对于<code>x-forwarded-for</code>来说就有点奇怪了。只要经过中间的代理，例如CDN、Web防火墙，正常应该有两个及以上IP才对，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X-Forwarded-For: client1, proxy1, proxy2</span><br></pre></td></tr></table></figure>
+<p>于是，进入 <strong>nginx-ingress-controller</strong> pod，查看具体的NGINX配置，看到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxy_set_header X-Real-IP              <span class="variable">$the_real_ip</span>;</span><br><span class="line">proxy_set_header X-Forwarded-For        <span class="variable">$the_real_ip</span>;</span><br></pre></td></tr></table></figure>
+<p>可以看到，经过ingress-nginx后，<code>X-Real-IP</code> 和 <code>X-Forwarded-For</code>都被重写了，在<a href="(https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap)">ingress-nginx官网文档</a>得知，如果要将 <code>X-Forwarded-For</code> 不重写，完整显示，要在 <strong>nginx-configuration</strong> 中添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compute-full-forwarded-for: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>其实该字段保持默认的<code>false</code>即可，不然程序需要自己排除代理IP，这样不好。</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>最好让ingress-nginx自己排除代理IP，这样在<code>X-Real-IP</code> 或 <code>X-Forwarded-For</code> 中保留一个真实IP，程序直接获取该header值就行。</p>
+<p>如何在ingress-nginx中排除代理IP呢？需要使用到nginx realip模块，确保realip模块是启用的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -V | grep realip_module</span><br></pre></td></tr></table></figure>
+<p>在正常的NGINX配置如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set_real_ip_from  ip_proxy1;</span><br><span class="line">set_real_ip_from  ip_proxy2;</span><br><span class="line">...</span><br><span class="line">set_real_ip_from  ip_proxyx;</span><br><span class="line">real_ip_header    X-Forwarded-For;</span><br><span class="line">real_ip_recursive on;</span><br></pre></td></tr></table></figure>
+<p>在ingress-nginx配置 <strong>nginx-configuration</strong> 中添加如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxy-real-ip-cidr: ip_proxy1,ip_proxy2,ip_proxyx</span><br><span class="line">forwarded-for-header: X-Forwarded-For</span><br></pre></td></tr></table></figure></p>
+<p><code>real_ip_recursive</code>无需配置，在<strong>nginx-ingress-controller</strong>的NGINX配置中默认是on。在整个HTTP代理链路中，要确保中间代理的IP都要添加到proxy-real-ip-cidr中，不然可能会不准确。</p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ingress/" rel="tag"># ingress</a>
+          
+            <a href="/tags/ingress-nginx/" rel="tag"># ingress-nginx</a>
+          
+            <a href="/tags/问题解决/" rel="tag"># 问题解决</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/28/Kubernetes集群部署/" rel="next" title="Kubernetes集群部署">
+                <i class="fa fa-chevron-left"></i> Kubernetes集群部署
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -383,6 +452,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -403,8 +476,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -459,6 +541,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#K8s-Ingress获取真实IP地址配置"><span class="nav-number">1.</span> <span class="nav-text">K8s Ingress获取真实IP地址配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#业务情况"><span class="nav-number">1.1.</span> <span class="nav-text">业务情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分析解决"><span class="nav-number">1.2.</span> <span class="nav-text">问题分析解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排查过程"><span class="nav-number">1.2.1.</span> <span class="nav-text">排查过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决"><span class="nav-number">1.2.2.</span> <span class="nav-text">解决</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -599,6 +697,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
